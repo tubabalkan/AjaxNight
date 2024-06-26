@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<h3 class="alert alert-primary"> Ajax Ürün İşlemleri</h3>
+<button id="btnlist" class="btn btn-outline-danger">Ürün Listesi</button>
+<button id="btncreate" class="btn btn-outline-primary">Ürün Ekle</button>
+<button id="btndelete" class="btn btn-outline-info">Ürün Sil</button>
+<button id="btnupdate" class="btn btn-outline-success">Ürün Güncelle</button>
+<button id="btnget" class="btn btn-outline-warning">Ürün Getir</button>
+
+<hr />
+
+<div class="alert alert-dark">Ürün Listesi</div>
+<div id="productlist">
+
+</div>
+<div class="alert alert-dark">Yeni Ürün Girişi</div>
+<div>
+    <input type="text" placeholder="Ürün Adını Giriniz" id="ProductName" class="form-control" />
+    <br />
+    <input type="text" placeholder="Ürün Stok Sayısını Giriniz" id="Stock" class="form-control" />
+    <br />
+    <input type="text" placeholder="Ürün Fiyatını Giriniz" id="Price" class="form-control" />
+    <br />
+</div>
+
+
+<script>
+    $("#btnlist").click(function () {
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Default/ProductList/",
+            success: function (funk1) {
+                let products = jQuery.parseJSON(funk1);
+                console.log(products);
+                let tablehtml = "<table class=table table-bordered>"
+                    + "<tr>"
+                    + "<th>Ürün Id</th>"
+                    + "<th>Ürün Adı</th>"
+                    + "<th>Ürün Fiyat</th>"
+                    + "<th>Ürün Stok</th>"
+                    + "</tr>"
+                $.each(products, (index, value) => {
+                    tablehtml += `<tr>`
+                        + `<td>${value.ProductId}</td>`
+                        + `<td>${value.ProductName}</td>`
+                        + `<td>${value.Price}</td>`
+                        + `<td>${value.Stock}</td>`
+                        + `</tr>`
+                });
+                tablehtml += "</table>";
+                $("#productlist").html(tablehtml);
+            }
+        });
+    });
+
+
+    $("#btncreate").click(function () {
+        let productvalues = {
+            ProductName: $("#ProductName").val(),
+            Stock: $("#Stock").val(),
+            Price: $("#Price").val()
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Default/CreateProduct/",
+            data: productvalues,
+            success: function (funk2) {
+                let result = jQuery.parseJSON(funk2);
+                swal("Tebrikler!", "Ürün Başarıyla Eklendi!", "Başarılı");
+            }
+        });
+    });
+</script>

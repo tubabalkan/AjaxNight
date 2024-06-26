@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjaxNight", "AjaxNight\AjaxNight.csproj", "{544575CC-033C-4159-A123-4C6854D38106}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{544575CC-033C-4159-A123-4C6854D38106}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{544575CC-033C-4159-A123-4C6854D38106}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{544575CC-033C-4159-A123-4C6854D38106}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{544575CC-033C-4159-A123-4C6854D38106}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D5423CE-F113-4B4D-9DA9-ED1C45851515}
+	EndGlobalSection
+EndGlobal
