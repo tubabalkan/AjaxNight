@@ -15,8 +15,9 @@
 
 <div class="alert alert-dark">Ürün Listesi</div>
 <div id="productlist">
-
 </div>
+<hr />
+
 <div class="alert alert-dark">Yeni Ürün Girişi</div>
 <div>
     <input type="text" placeholder="Ürün Adını Giriniz" id="ProductName" class="form-control" />
@@ -26,9 +27,36 @@
     <input type="text" placeholder="Ürün Fiyatını Giriniz" id="Price" class="form-control" />
     <br />
 </div>
+<hr />
 
+<div class="alert alert-dark">Ürün Silme Ekranı</div>
+<div>
+    <input type="text" placeholder="Silinecek Ürünün Id Değerini Giriniz" id="ProductId" class="form-control" />
+    <br />
+</div>
+<hr />
+
+<div class="alert alert-dark">Ürün Detaylarını Getirme Ekranı</div>
+<div>
+    <input type="text" placeholder="Bilgisi Getirilecek Ürünün Id Değerini Giriniz" id="productgetid" class="form-control" />
+    <br />
+</div>
+<hr />
+
+<div class="alert alert-dark"> Ürün Güncelleme Paneli</div>
+<div>
+    <input type="text" placeholder="Güncellenecek Ürünün Id Değerini Giriniz" id="productıdedit" class="form-control" />
+    <br />
+    <input type="text" placeholder="Güncellenecek Ürünün Adını Giriniz" id="productnameedit" class="form-control" />
+    <br />
+    <input type="text" placeholder="Güncellenecek Ürünün Stok Sayısını Giriniz" id="productstockedit" class="form-control" />
+    <br />
+    <input type="text" placeholder="Güncellenecek Ürünün Fiyatını Giriniz" id="productpriceedit" class="form-control" />
+    <br />
+</div>
 
 <script>
+
     $("#btnlist").click(function () {
         $.ajax({
             contentType: "application/json",
@@ -59,7 +87,6 @@
         });
     });
 
-
     $("#btncreate").click(function () {
         let productvalues = {
             ProductName: $("#ProductName").val(),
@@ -77,4 +104,51 @@
             }
         });
     });
+
+    $("#btndelete").click(function () {
+        let id = $("#ProductId").val();
+        $.ajax({
+            url: "/Default/DeleteProduct/" + id,
+            type: "post",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (funk3) {
+                swal("Ürün başarıyla silindi")
+            }
+
+        });
+    });
+
+    $("#btnget").click(function () {
+        let id = $("#productgetid").val();
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            url: "/Default/GetProduct/" + id,
+            success: function (funk4) {
+                let result = jQuery.parseJSON(funk4);
+                console.log(result);
+            }
+        });
+    });
+
+    $("#btnupdate").click(function () {
+        let values = {
+            ProductId: $("#productıdedit").val(),
+            ProductName: $("#productnameedit").val(),
+            Stock: $("#productstockedit").val(),
+            Price: $("#productpriceedit").val(),
+
+
+        };
+        $.ajax({
+            url: "/Default/UpdateProduct/",
+            data: values,
+            success: function (funk5) {
+                swal("Ürün başarıyla Güncellendi")
+            }
+
+        });
+    });
+
 </script>
